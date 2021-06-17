@@ -1,25 +1,21 @@
 const express = require("express")
 const mongoose = require("mongoose");
-const {save, view,delt} = require('../controller/index')
-
+const {save, view,} = require('../controller/index')
+const User = require("../model/user")
 const router = express.Router();
-
+const {check} = require("express-validator")
+const {validateRequest, isRequestValidated} = require("../validators/index")
 
 router.get('/view', view)
 
-router.post('/save',save)
+router.post('/save',validateRequest,isRequestValidated,save)
 
-router.delete('view/:id',  (req, res) => {
-    User.findOneAndRemove({_id: req.params.id}, (err) => {
-      if (err) {
-        req.flash("error", err);
-        
-      }
-  
-      req.flash("success", "Your account has been deleted.");
-      
-      
-    });
+router.delete('/view/:name',  (req, res) => {
+  User.findOne({name: req.params.name}, function (error, user){
+    console.log("This object will get deleted " + user);
+    user.remove();
+
+});
   });
 
 module.exports = router;

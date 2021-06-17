@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import DatePicker from 'react-datepicker';
 import axios from "axios";
+import {Link} from "react-router-dom";
  
 import "react-datepicker/dist/react-datepicker.css";
 
@@ -95,6 +96,7 @@ export default class Page1 extends Component {
           /> </div>
           <button type="submit" onClick={this.handleSubmit}>submit</button>
                 </form>
+                <Link to="Page2" className="button">view all users</Link>
             </div>
         )
     }

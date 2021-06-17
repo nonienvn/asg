@@ -14,9 +14,13 @@ export default function Page2() {
         setUser(result.data.users);   
     }
 
-    const deleteUser = async id => {
-        await axios.delete(`http://localhost:3000/api/view${id}`)
-    }
+    const deleteUser = async (id) => {
+      console.log(id)
+        await axios.delete(`http://localhost:3000/api/view/${id}`)
+        window.location.reload();
+        loadUsers();
+       
+      }
     return (
         <div>
            <table class="table table-dark">
@@ -38,7 +42,7 @@ export default function Page2() {
      <td>{user.address}</td>
      <td>{user.dob}</td>
      <td>{user.gender}</td>
-     <td><Link type="button" class="btn btn-danger" onClick ={ () => deleteUser(user.id)}>delete</Link></td>
+     <td><Link type="button" class="btn btn-danger" onClick ={ () => deleteUser(user.name)}>delete</Link></td>
 
        
        </tr>))}

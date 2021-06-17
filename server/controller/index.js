@@ -1,6 +1,9 @@
 const User = require("../model/user")
+const {validationResult} = require("express-validator")
 
 exports.save = (req,res) => {
+
+   
     User.findOne({ email: req.body.email})
     .exec((error,user) => {
         if(user) return res.status(400).json({
@@ -24,7 +27,7 @@ exports.save = (req,res) => {
         _user.save((error,data) => {
             if(error){
                 return res.status(400).json({
-                    message: "something went wrong"
+                    message: "what something went wrong"
                 })
             }
             if(data) {
